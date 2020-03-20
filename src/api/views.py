@@ -80,8 +80,10 @@ class exportData(generics.ListAPIView):
 
 # this performs the operation stop operation Due to Lack of functionality of celery in windows, most of my time was
 # gone into setup also, I messed up the ubuntu wsl because of the I was not able to add much functionality
+
+# Through this I want to demonstrate that we can access celery task using ID and revoke or pause and control it
 class stopProcess(APIView):
     @staticmethod
     def post(request):
-        app.control.revoke(request.data["id"])  # this will revoke the process
+        app.control.revoke(request.data["task_id"])  # this will revoke the process
         return Response({"msg": "Process Stopped"}, status=200)
