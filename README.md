@@ -1,5 +1,5 @@
 # Long-Process-Manage-API
-As the task provided was to manage the task of time taking and computation expensive process using API's.
+Task provided was to manage the task for time-taking and computation expensive process using API's.
 
 ## Idea
 In local machine we can manage a asynchronous task using multithreading in python because the threads can access the data space of *main thread* in memory on every call through an API.
