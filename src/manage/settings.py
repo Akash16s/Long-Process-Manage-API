@@ -122,3 +122,8 @@ STATICFILES_DIRS = [
 # Media Folder settings
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
+
+# celery
+CELERY_BROKER_URL = 'ampqs'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
