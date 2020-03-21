@@ -5,7 +5,7 @@ from .models import filesModel, userData
 import csv
 
 
-# This function uploads the user data into the csv file
+# This function uploads the user data from the csv file
 @shared_task
 def baselineDataUpload(Hash):
     obj = filesModel.objects.get(hash=Hash)
