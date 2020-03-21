@@ -1,4 +1,6 @@
+import os
 from celery import shared_task
+from manage.settings import BASE_DIR
 from .models import filesModel, userData
 import csv
 
@@ -7,9 +9,10 @@ import csv
 @shared_task
 def baselineDataUpload(Hash):
     obj = filesModel.objects.get(hash=Hash)
-    with open(obj.file.name, 'r') as file:
-        reader = csv.reader(file)
+    with open(os.path.join(BASE_DIR, "media/") + obj.file.name, 'r') as file:
+        reader = list(file)
         for row in reader[1:]:
+            row = list(row)
             userData.objects.create(
                 userId=row[2],
                 first_name=row[3],
@@ -27,7 +30,7 @@ def extractDataFields(data, name):
     startDate = data["startDate"]
     endDate = data["endDate"]
     Data = userData.objects.filter(date__gte=startDate, date__lte=endDate)
-    with open('../media/' + name + '.csv', 'w', newline='') as file:
+    with open(os.path.join(BASE_DIR, "media/") + name + '.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(
             ["id", "transactionHash", "userId", "first_name", "middle_name", "last_name", "date", "phoneNumber"])
